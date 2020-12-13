@@ -117,6 +117,7 @@ public class DatabaseConnector {
     }
 
 
+
     public static void closeConnection() {
         try {
             if (resultSet != null) { //icten disa dogru kapatmak daha uygundur
@@ -135,5 +136,6 @@ public class DatabaseConnector {
 
 
     }
+
 
 }
