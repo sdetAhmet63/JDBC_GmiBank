@@ -1,5 +1,6 @@
 package gmibank.com.utilities;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +36,6 @@ public class DatabaseConnector {
 
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             resultSet = statement.executeQuery(query);
-            int update=statement.executeUpdate(query);
 
 
         } catch (SQLException sqlEx) {
@@ -44,23 +44,32 @@ public class DatabaseConnector {
         return resultSet;
     }
 
+    // ============ Create connection to the DB =============== //samet
+    public static Connection createConnection() {
+        try {
+            connection = DriverManager.getConnection(connectionUrl, dbusername, dbpassword);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+
     //query sonucunu list map seklinde almak icin bu method kullanilabilir
-    public static List<Map<String,String>> getQueryAsAListOfMaps(String query) throws SQLException {
-        resultSet=getResultSet(query);
-        ResultSetMetaData rsdm=resultSet.getMetaData();
-        int sizeOfColumns=rsdm.getColumnCount();
-        List<String> nameOfColumnsList=new ArrayList<>();
-        for (int i=1;i<=rsdm.getColumnCount();i++){
+    public static List<Map<String, String>> getQueryAsAListOfMaps(String query) throws SQLException {
+        resultSet = getResultSet(query);
+        ResultSetMetaData rsdm = resultSet.getMetaData();
+        int sizeOfColumns = rsdm.getColumnCount();
+        List<String> nameOfColumnsList = new ArrayList<>();
+        for (int i = 1; i <= rsdm.getColumnCount(); i++) {
             nameOfColumnsList.add(rsdm.getColumnName(i));
         }
         resultSet.beforeFirst();
 
-        List<Map<String,String>> listOfResultset=new ArrayList<>();
-        while (resultSet.next()){
-            Map<String,String> mapOfEachRow=new HashMap<>();
-            for (int j=0;j<sizeOfColumns;j++)
-            {
-                mapOfEachRow.put(nameOfColumnsList.get(j),resultSet.getString(nameOfColumnsList.get(j)));
+        List<Map<String, String>> listOfResultset = new ArrayList<>();
+        while (resultSet.next()) {
+            Map<String, String> mapOfEachRow = new HashMap<>();
+            for (int j = 0; j < sizeOfColumns; j++) {
+                mapOfEachRow.put(nameOfColumnsList.get(j), resultSet.getString(nameOfColumnsList.get(j)));
             }
             listOfResultset.add(mapOfEachRow);
         }
@@ -100,22 +109,50 @@ public class DatabaseConnector {
 //        return states;
 //    }
     //-----------------------------------------------------------------------------------
-    public static List<Map<String,String>> getEmployeesAsListOfMap() throws SQLException {
-        String query="SELECT * FROM public.tp_employee; ";
+    public static List<Map<String, String>> getEmployeesAsListOfMap() throws SQLException {
+        String query = "SELECT * FROM public.tp_employee; ";
         return getQueryAsAListOfMaps(query);
     }
-    public static Map<String,String> getEmployeeByLoginName(String loginName) throws SQLException {
-        String query="SELECT * FROM public.tp_employee; ";
+
+    public static Map<String, String> getEmployeeByLoginName(String loginName) throws SQLException {
+        String query = "SELECT * FROM public.tp_employee; ";
         return getQueryAsAListOfMaps(query).get(0);
     }
+
     //-----------------------------------------------------------------------------------
-    public static List<Map<String,String>> getUsersAsListOfMap() throws SQLException {
-        String query="SELECT * FROM public.jhi_user; ";
+    public static List<Map<String, String>> getUsersAsListOfMap() throws SQLException {
+        String query = "SELECT * FROM public.jhi_user; ";
         return getQueryAsAListOfMaps(query);
     }
-    public static Map<String,String> getUserByLoginName(String loginName) throws SQLException {
-        String query="SELECT * FROM public.jhi_user; ";
+
+    public static Map<String, String> getUserByLoginName(String loginName) throws SQLException {
+        String query = "SELECT * FROM public.jhi_user; ";
         return getQueryAsAListOfMaps(query).get(0);
+    }
+
+    public static void executeUpdateQuery(String updateQuery) {
+        /////update icin////eksik olabilir
+        createConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
+
+            //preparedStatement.setBigDecimal(1, new BigDecimal(999.99));//ondalik sayilari ayarla
+
+            preparedStatement.setInt(1, 2);
+            preparedStatement.setString(2, "Houston Insert");
+            preparedStatement.setObject(3, null);
+
+            int row = preparedStatement.executeUpdate();
+
+            // rows affected
+            System.out.println(row);
+
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -131,7 +168,7 @@ public class DatabaseConnector {
                 connection.close();
             }
 
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
 
@@ -139,3 +176,4 @@ public class DatabaseConnector {
     }
 
 }
+

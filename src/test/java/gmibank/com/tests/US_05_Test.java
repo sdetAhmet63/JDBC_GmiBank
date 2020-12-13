@@ -56,6 +56,6 @@ public class US_05_Test {
         List<Map<String,String>> query3=DatabaseConnector.getQueryAsAListOfMaps(countryQuery);
         System.out.println(query3);
         Assert.assertTrue(query3.get(0).get("last_name").equals("Cruz"));
-        List<Map<String,String>> query3=DatabaseConnector.getResultSet()
+       //List<Map<String,String>> query3=DatabaseConnector.getResultSet()
     }
 }
