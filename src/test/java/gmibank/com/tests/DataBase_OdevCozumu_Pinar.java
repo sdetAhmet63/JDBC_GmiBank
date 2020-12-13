@@ -71,7 +71,7 @@ public class DataBase_OdevCozumu_Pinar {
 
         userAndCustomerListMap=DatabaseConnector.getQueryAsAListOfMaps(userAndCustomerQuery);
         System.out.println(userAndCustomerListMap.size());
-        Assert.assertEquals(userAndCustomerListMap.size(),45);
+        Assert.assertEquals(userAndCustomerListMap.size(),39);
     }
     //datalarin sayisi degisebilir yeni degisiklige uygun guncelleyiniz...
 }

@@ -3,10 +3,10 @@ package gmibank.com.tests;
 import gmibank.com.utilities.DatabaseConnector;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+
 
 public class US_05_Test {
 
@@ -54,7 +54,8 @@ public class US_05_Test {
 
         List<Map<String,String>> query3=DatabaseConnector.getQueryAsAListOfMaps(countryQuery);
         System.out.println(query3);
-        Assert.assertTrue(query3.get(0).get("last_name").equals("Cruz"));
+        Assert.assertTrue(query3.get(0).get("last_name").equals("Rose"));
 
     }
+    //datalar degisebilir yeni degisiklige uygun guncelleyiniz...
 }
