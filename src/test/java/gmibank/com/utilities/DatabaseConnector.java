@@ -35,6 +35,8 @@ public class DatabaseConnector {
 
             statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             resultSet = statement.executeQuery(query);
+            int update=statement.executeUpdate(query);
+
 
         } catch (SQLException sqlEx) {
             System.out.println("SQL Exception:" + sqlEx.getStackTrace());
