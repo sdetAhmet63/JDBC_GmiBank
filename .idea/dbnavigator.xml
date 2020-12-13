@@ -32,8 +32,10 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="6ff684e6-3228-4f75-949d-6898f0678acd">
-      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[select *
-from jhi_user;
+      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[SELECT phone_number
+FROM tp_customer;
+
+
 
 select name,first_name,last_name
 from tp_customer
