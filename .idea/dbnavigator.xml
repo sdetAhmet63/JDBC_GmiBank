@@ -23,21 +23,11 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes>
-      <connection connection-id="6ff684e6-3228-4f75-949d-6898f0678acd">
-        <schema name="pg_catalog" object-types="table, function, view" />
-        <schema name="public" object-types="table, function, view, column" />
-      </connection>
-    </loaded-nodes>
+    <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="6ff684e6-3228-4f75-949d-6898f0678acd">
-      <console name="Connection" type="STANDARD" schema="public" session="Main"><![CDATA[select *
-from jhi_persistent_audit_evt_data;
-
-select count(account_type) as totalAccount,account_type,avg (balance) as ortBalance
-from tp_account
-group by account_type;]]></console>
+      <console name="Connection" type="STANDARD" schema="" session="Main" />
     </connection>
     <connection id="f9deefbe-c58f-4b1f-b443-a555da530a5d">
       <console name="Connection 1" type="STANDARD" schema="" session="Main" />
