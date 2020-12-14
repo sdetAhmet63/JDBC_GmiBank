@@ -25,18 +25,17 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-        <schema name="pg_catalog" object-types="function, view, table" />
-        <schema name="public" object-types="function, view, table" />
+        <schema name="pg_catalog" object-types="view, table, function" />
+        <schema name="public" object-types="column, index, view, dataset trigger, table, sequence, constraint, function" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155">
-      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[select count(activated)
-from jhi_user
-join jhi_user_authority
-on jhi_user.id=jhi_user_authority.user_id
-where  authority_name='ROLE_ADMIN' and activated='false';]]></console>
+      <console name="GMIBANK" type="STANDARD" schema="public" session="Main"><![CDATA[select *
+from jhi_user_authority
+where authority_name='ROLE_ADMIN'
+order by user_id desc;]]></console>
     </connection>
     <connection id="62632466-4fe2-48b4-b0e5-b754b852f3cf">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
@@ -52,6 +51,9 @@ where  authority_name='ROLE_ADMIN' and activated='false';]]></console>
     <connection id="ffd9663e-6606-4b2e-94a1-ea15c1920155" />
     <connection id="62632466-4fe2-48b4-b0e5-b754b852f3cf" />
     <connection id="285e89eb-f825-40f5-8c1b-8cca6826a947" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="ffd9663e-6606-4b2e-94a1-ea15c1920155" dataset="public.jhi_user" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
