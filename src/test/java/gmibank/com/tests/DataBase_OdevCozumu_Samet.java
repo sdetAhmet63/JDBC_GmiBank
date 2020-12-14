@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import gmibank.com.utilities.DatabaseConnector;
 
-
-
 public class DataBase_OdevCozumu_Samet {
 
 
